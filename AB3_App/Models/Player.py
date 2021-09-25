@@ -1,22 +1,24 @@
 from django.db import models
 from .Team import Team
 
+POSIBLE_STATES = {
+    'AVAIABLE': 'AV',
+    'DOUBTFUL': 'DB',
+    'RULEDOUT': 'RO',
+}
+
+STATES_LIST = [
+    (POSIBLE_STATES['AVAIABLE'], 'Avaiable'),
+    (POSIBLE_STATES['DOUBTFUL'], 'Doubtful'),
+    (POSIBLE_STATES['RULEDOUT'], 'Ruled Out'),
+]
+
 
 class Player(models.Model):
     name = models.CharField(max_length=300, unique=True)
 
-    AVAIABLE = 'AV'
-    DOUBTFUL = 'DB'
-    RULEDOUT = 'RO'
-
-    STATES_LIST = [
-        (AVAIABLE, 'Avaiable'),
-        (DOUBTFUL, 'Doubtful'),
-        (RULEDOUT, 'Ruled Out'),
-    ]
-
     state = models.CharField(
-        max_length=2, choices=STATES_LIST, default=AVAIABLE)
+        max_length=100, choices=STATES_LIST, default=POSIBLE_STATES['AVAIABLE'])
     team = models.ForeignKey(Team, on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
