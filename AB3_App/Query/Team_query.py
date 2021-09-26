@@ -3,16 +3,21 @@ from ..models.Player import Player
 from django.forms.models import model_to_dict
 
 
-def get_team_list():
-    team_list = list(Team.objects.all().values())
+def get_list():
+    team_list = Team.objects.all()
     return team_list
 
 
-def get_team_by_id(id):
+def get(id):
     team = Team.objects.get(pk=id)
-    player_list = list(Player.objects.filter(team=team).values())
+    return team
 
-    team_dict = model_to_dict(team)
-    team_dict['player_list'] = player_list
 
-    return team_dict
+def delete(id):
+    team = get(id)
+    team.delete()
+
+
+def create(name):
+    team = Team(name)
+    team.save()
