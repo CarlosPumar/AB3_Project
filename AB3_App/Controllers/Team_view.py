@@ -16,19 +16,8 @@ class Team_list_view(APIView):
         serializer = Team_simple_serializer(team_list, many=True)
         return Response(serializer.data)
 
-
-class Team_detail_view(APIView):
-
-    def get(self, request, id):
-        try:
-            team = Team_query.get(id)
-            serializer = Team_serializer(team)
-            return Response(serializer.data)
-        except:
-            return Response("Error al acceder", status=status.HTTP_400_BAD_REQUEST)
-
     def post(self, request):
-        """Crea objeto con nombre"""
+        """Crear objeto"""
 
         serializer = Team_serializer(data=request.data)
 
@@ -37,6 +26,18 @@ class Team_detail_view(APIView):
             return Response({'status': 'correct'})
         else:
             return Response("Error al crear equipo", status=status.HTTP_400_BAD_REQUEST)
+
+
+class Team_detail_view(APIView):
+
+    def get(self, request, id):
+        """Obtencion objeto"""
+        try:
+            team = Team_query.get(id)
+            serializer = Team_serializer(team)
+            return Response(serializer.data)
+        except:
+            return Response("Error al acceder", status=status.HTTP_400_BAD_REQUEST)
 
     def put(self, request, id):
         """Actualizar objeto"""
@@ -51,7 +52,7 @@ class Team_detail_view(APIView):
             return Response("Error al crear equipo", status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, id):
-        """Eliminar un objeto"""
+        """Eliminar objeto"""
 
         try:
             Team_query.delete(id)
