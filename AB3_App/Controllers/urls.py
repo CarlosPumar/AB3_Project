@@ -1,16 +1,47 @@
-from django.urls import path
-from .Team_view import Team_list_view, Team_detail_view
-from .Player_view import Player_list_view, Player_detail_relation_view, Player_detail_simple_view
+from django.urls import path, include
+from .Team_view import Team_view_set, Team_view_set_for_detail
+from .Player_view import Player_view_set, Player_view_set_for_detail
+
+from rest_framework.routers import DefaultRouter
+
+""" Team views """
+team_list = Team_view_set.as_view({
+    'get': 'list',
+    'post': 'create',
+})
+
+team_detail = Team_view_set_for_detail.as_view({
+    'get': 'retrieve',
+    'put': 'update',
+    'patch': 'partial_update',
+    'delete': 'destroy'
+})
+
+""" Plater views """
+player_list = Player_view_set.as_view({
+    'get': 'list',
+    'post': 'create',
+})
+
+player_detail = Player_view_set.as_view({
+    'get': 'retrieve',
+    'put': 'update',
+    'patch': 'partial_update',
+    'delete': 'destroy'
+})
+
+player_get_all = Player_view_set_for_detail.as_view({
+    'get': 'get_all',
+})
+
 
 urlpatterns = [
     # Team
-    path('team/list', Team_list_view.as_view(), name='team_list_view '),
-    path('team/<int:id>', Team_detail_view.as_view(), name='team_detail_view '),
+    path('team/', team_list, name='team-list'),
+    path('team/<int:pk>', team_detail, name='team-detail'),
 
     # Player
-    path('player/list', Player_list_view.as_view(), name="player_list_view"),
-    path('player/relation/<int:id>', Player_detail_relation_view.as_view(),
-         name="player_detail_relation_view"),
-    path('player/simple/<int:id>', Player_detail_simple_view.as_view(),
-         name="player_detail_simple_view"),
+    path('player/', player_list, name='player-list'),
+    path('player/<int:pk>', player_detail, name='player-detail'),
+    path('player/<int:pk>/get_all', player_get_all, name='player-get-all'),
 ]

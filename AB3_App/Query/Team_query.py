@@ -1,6 +1,4 @@
 from ..models.Team import Team
-from ..models.Player import Player
-from django.forms.models import model_to_dict
 
 
 def get_list():
