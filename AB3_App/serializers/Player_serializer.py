@@ -28,15 +28,3 @@ class Player_serializer(serializers.ModelSerializer):
     class Meta:
         model = Player
         fields = ['id', 'name', 'state', 'team', 'relation']
-
-
-class Player_no_relation_serializer(serializers.ModelSerializer):
-
-    # Importamos aqui para no tener errores de importaciones circulares
-    from .Team_serializer import Team_simple_serializer
-
-    team = Team_simple_serializer()
-
-    class Meta:
-        model = Player
-        fields = ['id', 'name', 'state', 'team']

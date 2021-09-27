@@ -1,4 +1,5 @@
 from ..models.Team import Team
+from . import Player_query
 
 
 def get_list():
@@ -19,3 +20,8 @@ def delete(id):
 def create(name):
     team = Team(name)
     team.save()
+
+
+def get_from_player(id):
+    player = Player_query.get(id)
+    return player.team
