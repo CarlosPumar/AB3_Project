@@ -31,7 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'AB3_App.apps.Ab3AppConfig',
+    'AB3_App',
     'rest_framework',
 
     'django.contrib.admin',
