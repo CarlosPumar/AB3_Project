@@ -1,2 +1,2 @@
 #Ignorar todas las carpetas de caché
-__pycache__
+*__pycache__
