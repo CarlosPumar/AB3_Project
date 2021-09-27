@@ -20,6 +20,7 @@ class Team_list_view(APIView):
 class Team_detail_view(APIView):
 
     def get(self, request, id):
+        """Obtencion objeto"""
         try:
             team = Team_query.get(id)
             serializer = Team_serializer(team)
@@ -27,8 +28,8 @@ class Team_detail_view(APIView):
         except:
             return Response("Error al acceder", status=status.HTTP_400_BAD_REQUEST)
 
-    def post(self, request):
-        """Crea objeto con nombre"""
+    def post(self, request, id=None):
+        """Crear objeto"""
 
         serializer = Team_serializer(data=request.data)
 
@@ -51,7 +52,7 @@ class Team_detail_view(APIView):
             return Response("Error al crear equipo", status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, id):
-        """Eliminar un objeto"""
+        """Eliminar objeto"""
 
         try:
             Team_query.delete(id)
