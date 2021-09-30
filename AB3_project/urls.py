@@ -1,4 +1,4 @@
-"""AB3_project URL Configuration
+"""ab3_project URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/3.2/topics/http/urls/
@@ -16,7 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+""" Importar urls de las diferentes entidades """
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include('AB3_App.controllers.urls'))
+    path('api/', include('ab3_project.team.urls'), name='teams'),
+    path('api/', include('ab3_project.player.urls'), name='players'),
+    path('api/', include('ab3_project.relation.urls'), name='relations'),
 ]
