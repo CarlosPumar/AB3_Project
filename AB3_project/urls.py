@@ -23,4 +23,5 @@ urlpatterns = [
     path('api/', include('ab3_project.team.urls'), name='teams'),
     path('api/', include('ab3_project.player.urls'), name='players'),
     path('api/', include('ab3_project.relation.urls'), name='relations'),
+    path('api/', include('ab3_project.banker.urls'), name='banker'),
 ]

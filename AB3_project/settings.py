@@ -38,7 +38,12 @@ INSTALLED_APPS = [
     'ab3_project.team',
     'ab3_project.player',
     'ab3_project.relation',
+    'ab3_project.banker',
 
+    #utils
+    'ab3_project.utils',
+
+    #Django apps
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
