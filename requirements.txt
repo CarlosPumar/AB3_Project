@@ -1,4 +1,6 @@
 django==3.2.7
 djangorestframework==3.12.4
 mysqlclient==2.0.3
-PyMySql==1.0.2p
+PyMySql==1.0.2
+tweepy==4.0.0
+channels==3.0.4

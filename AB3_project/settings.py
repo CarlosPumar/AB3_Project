@@ -31,19 +31,25 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    #API rest framework
+    # API rest framework
     'rest_framework',
 
-    #Entidades
+    # Entidades
     'ab3_project.team',
     'ab3_project.player',
     'ab3_project.relation',
     'ab3_project.banker',
 
-    #utils
+    # Utils
     'ab3_project.utils',
 
-    #Django apps
+    # Twitter
+    'ab3_project.twitter',
+
+    # Channels
+    'channels',
+
+    # Django apps
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -80,8 +86,13 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'ab3_project.wsgi.application'
+ASGI_APPLICATION = 'ab3_project.asgi.application'
 
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer"
+    }
+}
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
