@@ -1,0 +1,5 @@
+#La carpeta del entorno virtual
+venv
+
+#La cache de python
+__pychache__
