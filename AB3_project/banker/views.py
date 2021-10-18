@@ -2,7 +2,6 @@ from django.http.response import Http404
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from . import query as Banker_query
 from .serializer import Banker_serializer
 
 from .models import Banker
@@ -13,10 +12,11 @@ from .models import Banker
 class Banker_view(APIView):
 
     """ Obtener banker, si no devolver error"""
+
     def get_banker(self):
 
         try:
-            return Banker_query.get()
+            return Banker.objects.get(pk=1)
         except Banker.DoesNotExist:
             raise Http404
 

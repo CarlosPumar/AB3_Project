@@ -9,9 +9,10 @@ class WSConsumer(WebsocketConsumer):
             "twitter", self.channel_name)
         self.accept()
 
-    def disconnect(self, close_code):
+    def disconnect(self, code):
         async_to_sync(self.channel_layer.group_discard)(
             "twitter", self.channel_name)
+        super().disconnect(code)
 
     def player_message(self, event):
         self.send(text_data=event["text"])

@@ -1,5 +1,5 @@
-from .models import Team
 from rest_framework import serializers
+from .models import Team
 
 
 class Team_simple_serializer(serializers.ModelSerializer):
@@ -12,6 +12,6 @@ class Team_simple_serializer(serializers.ModelSerializer):
     """
 
     class Meta:
+
         model = Team
         fields = ['id', 'name']
-

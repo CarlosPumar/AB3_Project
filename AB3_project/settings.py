@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
+
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -31,6 +32,9 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    # Channels
+    'channels',
+
     # API rest framework
     'rest_framework',
 
@@ -45,9 +49,6 @@ INSTALLED_APPS = [
 
     # Twitter
     'ab3_project.twitter',
-
-    # Channels
-    'channels',
 
     # Django apps
     'django.contrib.admin',

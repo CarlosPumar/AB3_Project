@@ -1,8 +1,5 @@
-from ab3_project.team import query
 from rest_framework import serializers
 from .models import Relation
-from ..player.serializer import Player_serializer_to_relation
-from ..team import query as Team_query
 
 
 class Relation_serializer(serializers.ModelSerializer):
@@ -24,8 +21,9 @@ class Relation_serializer(serializers.ModelSerializer):
         "assists": x,
         "rebounds": x
     }
-    
+
     """
+    from ..player.serializer import Player_serializer_to_relation
 
     player = Player_serializer_to_relation()
     team_mate = Player_serializer_to_relation()
@@ -47,7 +45,7 @@ class Relation_simple_serializer(serializers.ModelSerializer):
         "assists": x,
         "rebounds": x
     }
-    
+
     """
 
     class Meta:
@@ -61,12 +59,14 @@ class Relation_simple_serializer(serializers.ModelSerializer):
 
         """
 
+        from ..team.models import Team
+
         if data['player'] == data['team_mate']:
             raise serializers.ValidationError(
                 "El jugador y el compañero no pueden ser el mismo")
         else:
-            team_team_mate = Team_query.get_from_player(data['team_mate'].id)
-            team_player = Team_query.get_from_player(data['player'].id)
+            team_team_mate = Team.objects.get(pk=data['team_mate'].id)
+            team_player = Team.objects.get(pk=data['player'].id)
 
             if team_player != team_team_mate:
                 raise serializers.ValidationError(

@@ -13,6 +13,8 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from ab3_project.twitter.stream import Stream_Twitter
+from ab3_project.utils.data import CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN, ACCESS_TOKEN_SECRET, ID_ACCOUNT
 from django.contrib import admin
 from django.urls import path, include
 
@@ -25,3 +27,9 @@ urlpatterns = [
     path('api/', include('ab3_project.relation.urls'), name='relations'),
     path('api/', include('ab3_project.banker.urls'), name='banker'),
 ]
+
+
+stream = Stream_Twitter(consumer_key=CONSUMER_KEY, consumer_secret=CONSUMER_SECRET,
+                        access_token=ACCESS_TOKEN, access_token_secret=ACCESS_TOKEN_SECRET)
+
+stream.filter(follow=[ID_ACCOUNT], threaded=True)

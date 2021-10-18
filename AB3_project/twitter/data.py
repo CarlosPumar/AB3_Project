@@ -1,8 +1,0 @@
-# Datos de la cuenta para acceder a la api
-CONSUMER_KEY = "kCv7C000n3NyGwbEDfohGfnix"
-CONSUMER_SECRET = "L3l3ylZnPc1RaVX9uyZMYhomQXliCZARZpqqoXIlkAbD321Zom"
-ACCESS_TOKEN = "2229066653-BOF7dbwt9XvTesBozBU98v6sYMzYMIMUpGjnqSY"
-ACCESS_TOKEN_SECRET = "SzfKEo0TyUP1LgaNg5cIkiV2UIlM1frSihX5fgQEPTU5d"
-
-# Id de la cuenta que se sigue
-ID_ACCOUNT = "1409119521852510211"
