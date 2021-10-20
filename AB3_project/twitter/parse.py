@@ -1,4 +1,5 @@
 from ..utils.data import POSIBLE_STATES
+from ..player.models import Player
 
 # Get all the posible player state names: 'avaiable', 'doubtful', etc
 
@@ -38,7 +39,13 @@ def is_status_player(text):
 
 def get_player_name(text):
 
-    player_name = text.split("(")[0][:-1]
+    player_name = False
+    players = Player.manager_extend.all()
+
+    for player in players:
+        if player.name.lower() in text.lower():
+            player_name = player.name
+            break
 
     return player_name
 

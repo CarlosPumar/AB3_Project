@@ -1,6 +1,7 @@
 from django.http.response import Http404
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.permissions import IsAuthenticated
 
 from .serializer import Banker_serializer
 
@@ -10,6 +11,8 @@ from .models import Banker
 
 
 class Banker_view(APIView):
+
+    permission_classes = [IsAuthenticated]
 
     """ Obtener banker, si no devolver error"""
 

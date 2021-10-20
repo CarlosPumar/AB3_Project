@@ -4,3 +4,4 @@ mysqlclient==2.0.3
 PyMySql==1.0.2
 tweepy==4.0.0
 channels==3.0.4
+djangorestframework_simplejwt
