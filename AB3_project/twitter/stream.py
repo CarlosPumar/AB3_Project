@@ -7,7 +7,6 @@ class Stream_Twitter(Stream):
     # When a tweet is recived, 'manage_message' manage the tweet
 
     def on_status(self, status):
-        print("managing...")
         manage_message(status.text)
 
     def on_error(self, status):

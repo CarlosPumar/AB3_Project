@@ -29,23 +29,18 @@ class JwtAuthMiddleware(BaseMiddleware):
 
         close_old_connections()
 
-        headers = dict(scope['headers'])
+        try:
+            token_key = scope['query_string'].decode().split('=')[-1]
+            UntypedToken(token_key)
+        except (InvalidToken, TokenError) as e:
+            # Token is invalid
+            print(e)
+            scope['user'] = AnonymousUser()
+        else:
+            decoded_data = jwt_decode(
+                token_key, settings.SECRET_KEY, algorithms=["HS256"])
 
-        if b'authorization' in headers:
-            token_name, token_key = headers[b'authorization'].decode().split()
-
-            try:
-                # This will automatically validate the token and raise an error if token is invalid
-                UntypedToken(token_key)
-            except (InvalidToken, TokenError) as e:
-                # Token is invalid
-                print(e)
-                scope['user'] = AnonymousUser()
-            else:
-                decoded_data = jwt_decode(
-                    token_key, settings.SECRET_KEY, algorithms=["HS256"])
-
-                scope['user'] = await get_user(decoded_data['user_id'])
+            scope['user'] = await get_user(decoded_data['user_id'])
 
         return await super().__call__(scope, receive, send)
 

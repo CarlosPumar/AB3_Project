@@ -44,12 +44,15 @@ INSTALLED_APPS = [
     'ab3_project.player',
     'ab3_project.relation',
     'ab3_project.banker',
+    'ab3_project.user',
 
     # Utils
     'ab3_project.utils',
 
     # Twitter
     'ab3_project.twitter',
+
+    'corsheaders',
 
     # Django apps
     'django.contrib.admin',
@@ -61,6 +64,9 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
+    "django.middleware.common.CommonMiddleware",
+
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -69,6 +75,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+CORS_ORIGIN_ALLOW_ALL = True
 
 ROOT_URLCONF = 'ab3_project.urls'
 
@@ -99,15 +107,26 @@ CHANNEL_LAYERS = {
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+
+
 DATABASES = {
+
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
+
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+
+        'NAME': 'AB3DataBase',
+
+        'USER': 'postgres',
+
+        'PASSWORD': 'Maristas56.',
+
         'HOST': 'localhost',
-        'PORT': '',
-        'USER': 'root',
-        'PASSWORD': '',
-        'NAME': 'ab3',
+
+        'PORT': '5432',
+
     }
+
 }
 
 
@@ -165,8 +184,8 @@ REST_FRAMEWORK = {
 
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=1),
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=10),
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=2),
+    'REFRESH_TOKEN_LIFETIME': timedelta(minutes=15),
     'ROTATE_REFRESH_TOKENS': True,
     'BLACKLIST_AFTER_ROTATION': True,
     'ALGORITHM': 'HS256',

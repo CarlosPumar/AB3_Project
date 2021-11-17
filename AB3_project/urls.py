@@ -13,6 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+import sys
 from ab3_project.twitter.stream import Stream_Twitter
 from ab3_project.utils.data import CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN, ACCESS_TOKEN_SECRET, ID_ACCOUNT
 from django.contrib import admin
@@ -30,13 +31,21 @@ urlpatterns = [
     path('api/', include('ab3_project.player.urls'), name='players'),
     path('api/', include('ab3_project.relation.urls'), name='relations'),
     path('api/', include('ab3_project.banker.urls'), name='banker'),
+    path('api/', include('ab3_project.user.urls'), name='users'),
+
+    path('api/', include('ab3_project.utils.urls'), name='utils'),
 
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 ]
 
+try:
+    command = sys.argv[1]
+except IndexError:
+    command = "help"
 
-stream = Stream_Twitter(consumer_key=CONSUMER_KEY, consumer_secret=CONSUMER_SECRET,
-                        access_token=ACCESS_TOKEN, access_token_secret=ACCESS_TOKEN_SECRET)
+if command == "runserver":
+    stream = Stream_Twitter(consumer_key=CONSUMER_KEY, consumer_secret=CONSUMER_SECRET,
+                            access_token=ACCESS_TOKEN, access_token_secret=ACCESS_TOKEN_SECRET)
 
-stream.filter(follow=[ID_ACCOUNT], threaded=True)
+    stream.filter(follow=[ID_ACCOUNT], threaded=True)

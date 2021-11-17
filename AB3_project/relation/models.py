@@ -15,4 +15,4 @@ class Relation(models.Model):
     manager_extend = Relation_Manager()
 
     def __str__(self):
-        return self.player.name + ' - ' + self.team_mate.name
+        return 'player: ' + self.player.name + ' - ' + 'team_mate: ' + self.team_mate.name + ' state: ' + self.team_mate.state

@@ -1,14 +1,17 @@
 from channels.generic.websocket import WebsocketConsumer
 from asgiref.sync import async_to_sync
 from channels.auth import login
-from django.contrib.auth.models import AnonymousUser
+from django.contrib.auth.models import AnonymousUser, User
 
 
 class WSConsumer(WebsocketConsumer):
 
     def connect(self):
 
-        if self.scope['user'] != AnonymousUser():
+        user = self.scope['user']
+
+        if user != AnonymousUser():
+
             async_to_sync(self.channel_layer.group_add)(
                 "twitter", self.channel_name)
             self.accept()
