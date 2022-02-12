@@ -1,7 +1,4 @@
-from django.utils import tree
 from rest_framework import serializers
-
-from ab3_project.player.serializer import Player_serializer_to_relation
 from .models import Relation
 
 
@@ -63,7 +60,6 @@ class Relation_simple_serializer(serializers.ModelSerializer):
         """
 
         from ..team.models import Team
-        from ..player.models import Player
 
         if data['player'] == data['team_mate']:
             raise serializers.ValidationError(

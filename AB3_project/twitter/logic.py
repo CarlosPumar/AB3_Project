@@ -48,7 +48,7 @@ def send_data_from_twitter(data):
             },
         )
     except RuntimeError:
-        print("No se ha podido conectar")
+        print(RuntimeError)
 
 #  Return information that will be send to the extension
 

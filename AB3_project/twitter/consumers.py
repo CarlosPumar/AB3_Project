@@ -25,4 +25,5 @@ class WSConsumer(WebsocketConsumer):
         super().disconnect(code)
 
     def player_message(self, event):
+        print("sending...")
         self.send(text_data=event["text"])

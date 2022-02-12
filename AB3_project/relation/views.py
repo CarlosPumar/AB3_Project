@@ -1,8 +1,6 @@
 from rest_framework.response import Response
 from .serializer import Relation_simple_serializer, Relation_serializer
 from .models import Relation
-from ..player.models import Player
-from ..player.serializer import Player_simple_serializer
 
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
@@ -12,7 +10,7 @@ from rest_framework import status
 class Relation_view_set(viewsets.ModelViewSet):
     queryset = Relation.manager_extend.all()
     serializer_class = Relation_simple_serializer
-    #permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]
 
     """ Redefinimos el metodo heredado retrieve """
 

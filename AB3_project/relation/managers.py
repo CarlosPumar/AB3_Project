@@ -17,7 +17,6 @@ class Relation_Manager(models.Manager):
 
         for relation in relations:
             if relation.team_mate.id == team_mate_id:
-                print(True)
                 return True
 
         return False
